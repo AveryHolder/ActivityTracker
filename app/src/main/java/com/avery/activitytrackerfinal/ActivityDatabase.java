@@ -20,10 +20,10 @@ public class ActivityDatabase {
     private ActivityDatabase(Context context) {
         activities = new ArrayList<>();
         Resources res = context.getResources();
-        String[] bands = res.getStringArray(R.array.activities);
+        String[] names = res.getStringArray(R.array.activities);
         String[] descriptions = res.getStringArray(R.array.descriptions);
-        for (int i = 0; i < bands.length; i++) {
-            activities.add(new Activity(i + 1, bands[i], descriptions[i]));
+        for (int i = 0; i < names.length; i++) {
+            activities.add(new Activity(i + 1, names[i], descriptions[i]));
         }
     }
 
@@ -31,9 +31,9 @@ public class ActivityDatabase {
         return activities;
     }
 
-    public Activity getActivity(int bandId) {
+    public Activity getActivity(int activityId) {
         for (Activity activity : activities) {
-            if (activity.getId() == bandId) {
+            if (activity.getId() == activityId) {
                 return activity;
             }
         }

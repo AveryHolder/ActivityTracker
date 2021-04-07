@@ -25,10 +25,10 @@ public class ListActivity extends AppCompatActivity implements ListFragment.OnAc
     }
 
     @Override
-    public void onActivitySelected(int bandId) {
-        // Send the band ID of the clicked button to DetailsActivity
+    public void onActivitySelected(int activityId) {
+        // Send the activity ID of the clicked button to DetailsActivity
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(DetailsActivity.EXTRA_ACTIVITY_ID, bandId);
+        intent.putExtra(DetailsActivity.EXTRA_ACTIVITY_ID, activityId);
         startActivity(intent);
     }
 }
