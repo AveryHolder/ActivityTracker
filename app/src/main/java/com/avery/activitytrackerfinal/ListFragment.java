@@ -43,7 +43,7 @@ public class ListFragment extends Fragment {
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            // Notify activity of band selection
+            // Notify activity of activity selection
             String activityId = (String) view.getTag();
             mListener.onActivitySelected(Integer.parseInt(activityId));
         }
@@ -57,61 +57,61 @@ public class ListFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.band_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // Send bands to recycler view
-        BandAdapter adapter = new BandAdapter(ActivityDatabase.getInstance(getContext()).getBands());
+        // Send activities to recycler view
+        ActivityAdapter adapter = new ActivityAdapter(ActivityDatabase.getInstance(getContext()).getActivities());
         recyclerView.setAdapter(adapter);
 
         return view;
     }
 
-    private class BandHolder extends RecyclerView.ViewHolder
+    private class ActivityHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
-        private Activity mBand;
+        private Activity mActivity;
 
         private TextView mNameTextView;
 
-        public BandHolder(LayoutInflater inflater, ViewGroup parent) {
+        public ActivityHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_band, parent, false));
             itemView.setOnClickListener(this);
             mNameTextView = itemView.findViewById(R.id.bandName);
         }
 
-        public void bind(Activity band) {
-            mBand = band;
-            mNameTextView.setText(mBand.getName());
+        public void bind(Activity activity) {
+            mActivity = activity;
+            mNameTextView.setText(mActivity.getName());
         }
 
         @Override
         public void onClick(View view) {
-            // Tell ListActivity what band was clicked
-            mListener.onActivitySelected(mBand.getId());
+            // Tell ListActivity what activity was clicked
+            mListener.onActivitySelected(mActivity.getId());
         }
     }
 
-    private class BandAdapter extends RecyclerView.Adapter<BandHolder> {
+    private class ActivityAdapter extends RecyclerView.Adapter<ActivityHolder> {
 
-        private List<Activity> mBands;
+        private List<Activity> mActivities;
 
-        public BandAdapter(List<Activity> bands) {
-            mBands = bands;
+        public ActivityAdapter(List<Activity> activities) {
+            mActivities = activities;
         }
 
         @Override
-        public BandHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ActivityHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            return new BandHolder(layoutInflater, parent);
+            return new ActivityHolder(layoutInflater, parent);
         }
 
         @Override
-        public void onBindViewHolder(BandHolder holder, int position) {
-            Activity band = mBands.get(position);
-            holder.bind(band);
+        public void onBindViewHolder(ActivityHolder holder, int position) {
+            Activity activity = mActivities.get(position);
+            holder.bind(activity);
         }
 
         @Override
         public int getItemCount() {
-            return mBands.size();
+            return mActivities.size();
         }
     }
 }

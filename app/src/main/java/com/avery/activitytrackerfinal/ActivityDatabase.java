@@ -27,7 +27,7 @@ public class ActivityDatabase {
         }
     }
 
-    public List<Activity> getBands() {
+    public List<Activity> getActivities() {
         return activities;
     }
 
